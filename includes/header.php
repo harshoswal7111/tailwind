@@ -1,26 +1,44 @@
+<?php
+require_once 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JRFC Member Directory</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @tailwind base;
-        @tailwind components;
-        @tailwind utilities;
-    </style>
+    <title><?php echo SITE_NAME; ?></title>
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-<nav class="bg-blue-600 p-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <a href="/" class="text-white text-xl font-bold">JRFC Members</a>
-        <div class="space-x-4">
-            <a href="register_family.php" class="text-white hover:text-blue-200">Register Family</a>
-            <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
-                <a href="admin/" class="text-white hover:text-blue-200">Admin Panel</a>
-            <?php endif; ?>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="<?php echo SITE_URL; ?>"><?php echo SITE_NAME; ?></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>/register.php">Register</a>
+                    </li>
+                    <?php if (isAdminLoggedIn()): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITE_URL; ?>/admin">Admin Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITE_URL; ?>/admin/logout.php">Logout</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITE_URL; ?>/admin/login.php">Admin Login</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<div class="container mx-auto p-4">
+    </nav>
+    <div class="container mt-4"> 
